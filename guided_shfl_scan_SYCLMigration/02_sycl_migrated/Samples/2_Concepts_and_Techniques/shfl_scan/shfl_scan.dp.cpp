@@ -486,6 +486,7 @@ bool shuffle_integral_image_test() {
 
 int main(int argc, char *argv[]) {
 
+  int cuda_device = 0;
   printf("Starting shfl_scan\n");
 
   dpct::device_info deviceProp;
