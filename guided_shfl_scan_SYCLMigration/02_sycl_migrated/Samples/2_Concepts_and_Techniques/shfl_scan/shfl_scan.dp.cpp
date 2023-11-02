@@ -492,11 +492,11 @@ int main(int argc, char *argv[]) {
   dpct::device_info deviceProp;
   checkCudaErrors(cuda_device = dpct::dev_mgr::instance().current_device_id());
 
-  std::cout << "Running on device: "<< deviceProp.get_name() << "\n";
-  
   checkCudaErrors(DPCT_CHECK_ERROR(dpct::get_device_info(
       deviceProp, dpct::dev_mgr::instance().get_device(cuda_device))));
-
+      
+  std::cout << "Running on device: "<< deviceProp.get_name() << "\n";
+  
   printf("> Detected Compute SM %d.%d hardware with %d multi-processors\n",
          deviceProp.get_major_version(), deviceProp.get_minor_version(),
          deviceProp.get_max_compute_units());
