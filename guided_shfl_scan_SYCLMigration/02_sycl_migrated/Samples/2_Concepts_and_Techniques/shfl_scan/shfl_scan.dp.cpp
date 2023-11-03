@@ -110,9 +110,15 @@ void shfl_scan_test(int *data, int width, const sycl::nd_item<3> &item_ct1,
   // scan sum the warp sums
   // the same shfl scan operation, but performed on warp sums
   //
-   if (warp_id == 0) { // &&
-  //     lane_id < (item_ct1.get_local_range(2) /
-  //                item_ct1.get_sub_group().get_local_range().get(0))) {
+  #ifdef NVIDIA_GPU
+    if (warp_id == 0) {
+   
+  #else
+    if (warp_id == 0 &&
+        lane_id < (item_ct1.get_local_range(2) /
+                 item_ct1.get_sub_group().get_local_range().get(0))) {
+  #endif 
+    
     int warp_sum = sums[lane_id];
 
     int mask = (1 << (item_ct1.get_local_range(2) /
