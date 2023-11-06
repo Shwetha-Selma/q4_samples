@@ -47,7 +47,9 @@ This sample demonstrates the migration of the following prominent CUDA features:
 
 The computation of `shuffle_simple_test` host method is included in two kernels, `shfl_scan_test` where __shfl_up is used to perform a scan operation across a block. It performs a scan inside a warp then to continue the scan operation across the block, each warp's sum is placed into shared memory. A single warp then performs a shuffle scan on that shared memory these results are then uniformly added to each warp's threads. The final sum of each block is then placed in a global memory and prefix sum is computed by `uniform_add` kernel call.
 
-//write about intergral image kernel
+In `shuffle_integral_image_test` method each thread is set to handle 16 values. In horizontal scan `get_prefix_sum` kernel the prefix sum for each thread's 16 value is computed, and the final sums is shared with other thread through the __shfl_up() instruction and a shuffle scan operation is performed to distribute the sums to the correct threads. Then shuffle `__shfl_xor` command is used to reformat the data inside the registers so that each thread holds consecutive data to be written so larger contiguous segments can be assembled for writing. 
+
+In Vertical scan prefix sums is computed columnwise. The approach here is to have each block compute a local set of sums. So first, the data covered by the block is loaded into shared memory, then instead of performing a sum in shared memory using __syncthreads, between stages, the data is reformatted so that the necessary sums occur inside warps and the shuffle scan operation is used. The final set of sums from the block is then propagated, with the block computing "down" the image and adding the running sum to the local block sums.
 
 >  **Note**: Refer to [Workflow for a CUDA* to SYCL* Migration](https://www.intel.com/content/www/us/en/developer/tools/oneapi/training/cuda-sycl-migration-workflow.html#gs.s2njvh) for general information about the migration workflow.
 
