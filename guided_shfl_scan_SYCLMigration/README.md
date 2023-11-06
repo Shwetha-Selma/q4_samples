@@ -1,10 +1,10 @@
 # `SHFL_Scan` Sample
  
-The `SHFL_Scan`, CUDA parallel prefix sum with shuffle intrinsics sample demonstrates the use of shuffle intrinsic __shfl_up_sync to perform a scan operation across a thread block. The sample also demonstrates the migration of these CUDA shuffle intrinsic APIs to SYCL group algorithm. The sample is implemented using SYCL* by migrating code from original CUDA source code and offloading computations to a CPU, GPU, or accelerator.
+The `SHFL_Scan`, CUDA parallel prefix sum with shuffle intrinsics sample demonstrates the use of shuffle intrinsic __shfl_up_sync to perform a scan operation across a thread block. The sample also demonstrates the migration of these CUDA shuffle intrinsic APIs to the SYCL group algorithm. The sample is implemented using SYCL* by migrating code from the original CUDA source code and offloading computations to a CPU, GPU, or accelerator.
 
 | Area                      | Description
 |:---                       |:---
-| What you will learn       | Migrate SHFL_Scan sample from CUDA to SYCL.
+| What you will learn       | Migrate the SHFL_Scan sample from CUDA to SYCL.
 | Time to complete          | 15 minutes
 | Category                  | Concepts and Functionality
 
@@ -24,7 +24,7 @@ This sample contains two versions in the following folders:
 
 | Folder Name                             | Description
 |:---                                     |:---
-| `01_dpct_output`                        | Contains output of SYCLomatic tool used to migrate SYCL-compliant code from CUDA code. The tool completely migrates code but need manual changes to get functional correctness on given list of hardware.
+| `01_dpct_output`                        | Contains the output of the SYCLomatic tool used to migrate SYCL-compliant code from CUDA code. The tool completely migrates code but needs manual changes to get functional correctness on the given list of hardware.
 | `02_sycl_migrated`                      | Contains migrated SYCL code from CUDA code with manual changes.
 
 ## Prerequisites
@@ -36,7 +36,7 @@ This sample contains two versions in the following folders:
 | Software                   | SYCLomatic (Tag - 20231004) <br> Intel® oneAPI Base Toolkit (Base Kit) version 2023.2.1 <br> oneAPI for NVIDIA GPUs plugin (version 2023.2.0) from Codeplay
 
 For more information on how to install Syclomatic Tool, visit [Migrate from CUDA* to C++ with SYCL*](https://www.intel.com/content/www/us/en/developer/tools/oneapi/training/migrate-from-cuda-to-cpp-with-sycl.html#gs.v354cy) <br>
-Refer [oneAPI for NVIDIA GPUs plugin](https://developer.codeplay.com/products/oneapi/nvidia/) from Codeplay to execute sample on NVIDIA GPU.
+Refer to [oneAPI for NVIDIA GPUs plugin](https://developer.codeplay.com/products/oneapi/nvidia/) from Codeplay to execute a sample on NVIDIA GPU.
 
 ## Key Implementation Details
 
@@ -45,11 +45,11 @@ This sample demonstrates the migration of the following prominent CUDA features:
 - Warp-level Primitives
 - Shared Memory
 
-The computation of `shuffle_simple_test` host method is included in two kernels, `shfl_scan_test` where __shfl_up is used to perform a scan operation across a block. It performs a scan inside a warp then to continue the scan operation across the block, each warp's sum is placed into shared memory. A single warp then performs a shuffle scan on that shared memory these results are then uniformly added to each warp's threads. The final sum of each block is then placed in a global memory and prefix sum is computed by `uniform_add` kernel call.
+The computation of `shuffle_simple_test` host method is included in two kernels, `shfl_scan_test` where __shfl_up is used to perform a scan operation across a block. It performs a scan inside a warp then to continue the scan operation across the block, each warp's sum is placed into shared memory. A single warp then performs a shuffle scan on that shared memory these results are then uniformly added to each warp's threads. The final sum of each block is then placed in global memory and the prefix sum is computed by `uniform_add` kernel call.
 
-In `shuffle_integral_image_test` method each thread is set to handle 16 values. In horizontal scan `get_prefix_sum` kernel the prefix sum for each thread's 16 value is computed, and the final sums is shared with other thread through the __shfl_up() instruction and a shuffle scan operation is performed to distribute the sums to the correct threads. Then shuffle `__shfl_xor` command is used to reformat the data inside the registers so that each thread holds consecutive data to be written so larger contiguous segments can be assembled for writing. 
+In the `shuffle_integral_image_test` method each thread is set to handle 16 values. In horizontal scan `get_prefix_sum` kernel the prefix sum for each thread's 16 value is computed, and the final sums are shared with other threads through the __shfl_up() instruction and a shuffle scan operation is performed to distribute the sums to the correct threads. Then shuffle `__shfl_xor` command is used to reformat the data inside the registers so that each thread holds consecutive data to be written so larger contiguous segments can be assembled for writing. 
 
-In Vertical scan prefix sums is computed columnwise. The approach here is to have each block compute a local set of sums. So first, the data covered by the block is loaded into shared memory, then instead of performing a sum in shared memory using __syncthreads, between stages, the data is reformatted so that the necessary sums occur inside warps and the shuffle scan operation is used. The final set of sums from the block is then propagated, with the block computing "down" the image and adding the running sum to the local block sums.
+In vertical scan, prefix sums are computed column-wise. The approach here is to have each block compute a local set of sums. So first, the data covered by the block is loaded into shared memory, then instead of performing a sum in shared memory using __syncthreads, between stages, the data is reformatted so that the necessary sums occur inside warps and the shuffle scan operation is used. The final set of sums from the block is then propagated, with the block computing "down" the image and adding the running sum to the local block sums.
 
 >  **Note**: Refer to [Workflow for a CUDA* to SYCL* Migration](https://www.intel.com/content/www/us/en/developer/tools/oneapi/training/cuda-sycl-migration-workflow.html#gs.s2njvh) for general information about the migration workflow.
 
@@ -59,12 +59,12 @@ The SHFL_Scan CUDA sample includes two implementations of scan operation using t
    1. `shuffle_simple_test` Method
    2. `shuffle_integral_image_test` Method
 
-In shuffle_simple_test method, a prefix sum is computed using the shuffle intrinsic for 65536 number of elements. This implementation is verified with the result from seriel implementation i.e, `CPUverify` method.
-In shuffle_integral_image_test method, computation of an integral image using the shuffle intrinsic is provided for 1920x1080 number of elements, where shuffle scan operation and shuffle xor operations are used. This method includes two approaches:
+In the shuffle_simple_test method, a prefix sum is computed using the shuffle intrinsic for 65536 number of elements. This implementation is verified with the result from serial implementation i.e., `CPUverify` method.
+In the shuffle_integral_image_test method, computation of an integral image using the shuffle intrinsic is provided for 1920x1080 number of elements, where shuffle scan operation and shuffle xor operations are used. This method includes two approaches:
    i. A horizontal (scanline) / Fast scan
    ii. A vertical (column) scan  
 
-The result from horizontal scan is verified by comparing the result from `verifyDataRowSums` seriel implementation, and the vertical scan result is verified by checking the final value in the corner which must be as same as the size of the buffer.
+The result from the horizontal scan is verified by comparing the result from `verifyDataRowSums` serial implementation, and the vertical scan result is verified by checking the final value in the corner which must be as same as the size of the buffer.
 
 For information on how to use SYCLomatic, refer to the materials at *[Migrate from CUDA* to C++ with SYCL*](https://www.intel.com/content/www/us/en/developer/tools/oneapi/training/migrate-from-cuda-to-cpp-with-sycl.html)*.
 
@@ -92,20 +92,20 @@ For this sample, the SYCLomatic tool automatically migrates 100% of the CUDA run
    ```
    The above step creates a JSON file named compile_commands.json with all the compiler invocations and stores the names of the input files and the compiler options.
 
-4. Pass the JSON file as input to the SYCLomatic tool. The result is written to a folder named dpct_output. The `--in-root` specifies path to the root of the source tree to be migrated. The `--gen-helper-function` option will make a copy of dpct header files/functions used in migrated code into the dpct_output folder as `include` folder. The `--use-experimental-features` option specifies experimental helper function used to logically group work-items.
+4. Pass the JSON file as input to the SYCLomatic tool. The result is written to a folder named dpct_output. The `--in-root` specifies the path to the root of the source tree to be migrated. The `--gen-helper-function` option will make a copy of the dpct header files/functions used in migrated code into the dpct_output folder as `include` folder. The `--use-experimental-features` option specifies an experimental helper function used to logically group work-items.
    ```
    c2s -p compile_commands.json --in-root ../../.. --gen-helper-function --use-experimental-features=logical-group
    ```
 
 ### Manual Workarounds 
 
-1. CUDA code includes a custom API `findCUDADevice` in helper_cuda file to find the best CUDA Device available.
+1. CUDA code includes a custom API `findCUDADevice` in the helper_cuda file to find the best CUDA Device available.
 ```
     findCudaDevice (argc, (const char **) argv);
 ```
-Since its a custom API SYCLomatic tool will not act on it and we can either remove it or replace it with the `dpct get_device()` API to get device details.
+Since it's a custom API SYCLomatic tool will not act on it and we can either remove it or replace it with the `dpct get_device()` API to get device details.
 
-2. CUDA code includes an `if condition` to check for required CUDA computability as CUDA __shfl intrinsic needs SM 3.0 or higher which is CUDA device specific and different from SYCL device version. We can either rewrite the code or remove it.
+2. CUDA code includes an `if condition` to check for required CUDA computability as CUDA __shfl intrinsic needs SM 3.0 or higher which is CUDA device specific and different from the SYCL device version. We can either rewrite the code or remove it.
 ```
     if (deviceProp.major < 3) {
     printf("> __shfl() intrinsic requires device SM 3.0+\n");
@@ -142,9 +142,9 @@ Since its a custom API SYCLomatic tool will not act on it and we can either remo
    ```
 
    > **Note**: 
-   > - By default, no flag are enabled during build which supports Intel® UHD Graphics, Intel® Gen9, Gen11, Xeon CPU. <br>
-   > - Enable **INTEL_MAX_GPU** flag during build which supports Intel® Data Center GPU Max 1550 or 1100 to get optimized performace. <br>
-   > - Enable **NVIDIA_GPU** flag during build which supports NVIDIA GPUs.([oneAPI for NVIDIA GPUs](https://developer.codeplay.com/products/oneapi/nvidia/) plugin   from Codeplay is required to build for NVIDIA GPUs ) <br>
+   > - By default, no flags are enabled during the build which supports Intel® UHD Graphics, Intel® Gen9, Gen11, Xeon CPU. <br>
+   > - Enable **INTEL_MAX_GPU** flag during build which supports Intel® Data Center GPU Max 1550 or 1100 to get optimized performance. <br>
+   > - Enable **NVIDIA_GPU** flag during the build which supports NVIDIA GPUs.([oneAPI for NVIDIA GPUs](https://developer.codeplay.com/products/oneapi/nvidia/) plugin   from Codeplay is required to build for NVIDIA GPUs ) <br>
 
    By default, this command sequence will build the `02_sycl_migrated` version of the program.
    
