@@ -1,0 +1,469 @@
+---
+MainSourceFile:  MainSrcFiles_placehold
+Replacements:
+  - FilePath:        '/home/tcs2/workspace_shwetha/cuda-samples/Samples/5_Domain_Specific/dwtHaar1D/dwtHaar1D.cu'
+    Offset:          4500
+    Length:          0
+    ReplacementText: "#include <sycl/sycl.hpp>\n#include <dpct/dpct.hpp>\n"
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/home/tcs2/workspace_shwetha/cuda-samples/Samples/5_Domain_Specific/dwtHaar1D/dwtHaar1D.cu'
+    Offset:          4947
+    Length:          31
+    ReplacementText: '#include "dwtHaar1D_kernel.dp.hpp"'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/home/tcs2/workspace_shwetha/cuda-samples/Samples/5_Domain_Specific/dwtHaar1D/dwtHaar1D.cu'
+    Offset:          8916
+    Length:          40
+    ReplacementText: 'DPCT_CHECK_ERROR(d_idata = (float *)sycl::malloc_device(smem_size, dpct::get_in_order_queue()))'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/home/tcs2/workspace_shwetha/cuda-samples/Samples/5_Domain_Specific/dwtHaar1D/dwtHaar1D.cu'
+    Offset:          8977
+    Length:          40
+    ReplacementText: 'DPCT_CHECK_ERROR(d_odata = (float *)sycl::malloc_device(smem_size, dpct::get_in_order_queue()))'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/home/tcs2/workspace_shwetha/cuda-samples/Samples/5_Domain_Specific/dwtHaar1D/dwtHaar1D.cu'
+    Offset:          9038
+    Length:          45
+    ReplacementText: 'DPCT_CHECK_ERROR(approx_final = (float *)sycl::malloc_device(smem_size, dpct::get_in_order_queue()))'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/home/tcs2/workspace_shwetha/cuda-samples/Samples/5_Domain_Specific/dwtHaar1D/dwtHaar1D.cu'
+    Offset:          9142
+    Length:          10
+    ReplacementText: 'DPCT_CHECK_ERROR(dpct::get_in_order_queue().memcpy'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/home/tcs2/workspace_shwetha/cuda-samples/Samples/5_Domain_Specific/dwtHaar1D/dwtHaar1D.cu'
+    Offset:          9179
+    Length:          24
+    ReplacementText: ''
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/home/tcs2/workspace_shwetha/cuda-samples/Samples/5_Domain_Specific/dwtHaar1D/dwtHaar1D.cu'
+    Offset:          9204
+    Length:          0
+    ReplacementText: '.wait())'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/home/tcs2/workspace_shwetha/cuda-samples/Samples/5_Domain_Specific/dwtHaar1D/dwtHaar1D.cu'
+    Offset:          9592
+    Length:          4
+    ReplacementText: 'sycl::range<3>'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/home/tcs2/workspace_shwetha/cuda-samples/Samples/5_Domain_Specific/dwtHaar1D/dwtHaar1D.cu'
+    Offset:          9607
+    Length:          0
+    ReplacementText: '(1, 1, 1)'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/home/tcs2/workspace_shwetha/cuda-samples/Samples/5_Domain_Specific/dwtHaar1D/dwtHaar1D.cu'
+    Offset:          9611
+    Length:          4
+    ReplacementText: 'sycl::range<3>'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/home/tcs2/workspace_shwetha/cuda-samples/Samples/5_Domain_Specific/dwtHaar1D/dwtHaar1D.cu'
+    Offset:          9625
+    Length:          0
+    ReplacementText: '(1, 1, 1)'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/home/tcs2/workspace_shwetha/cuda-samples/Samples/5_Domain_Specific/dwtHaar1D/dwtHaar1D.cu'
+    Offset:          10062
+    Length:          12
+    ReplacementText: 'block_size[2]'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/home/tcs2/workspace_shwetha/cuda-samples/Samples/5_Domain_Specific/dwtHaar1D/dwtHaar1D.cu'
+    Offset:          10170
+    Length:          11
+    ReplacementText: 'grid_size[2]'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/home/tcs2/workspace_shwetha/cuda-samples/Samples/5_Domain_Specific/dwtHaar1D/dwtHaar1D.cu'
+    Offset:          10220
+    Length:          12
+    ReplacementText: 'block_size[2]'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/home/tcs2/workspace_shwetha/cuda-samples/Samples/5_Domain_Specific/dwtHaar1D/dwtHaar1D.cu'
+    Offset:          10408
+    Length:          0
+    ReplacementText: "  /*\n  DPCT1049:5: The work-group size passed to the SYCL kernel may exceed the limit. To get the device limit, query info::device::max_work_group_size. Adjust the work-group size if needed.\n  */\n"
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/home/tcs2/workspace_shwetha/cuda-samples/Samples/5_Domain_Specific/dwtHaar1D/dwtHaar1D.cu'
+    Offset:          10410
+    Length:          51
+    ReplacementText: "dpct::get_in_order_queue().parallel_for(\n    sycl::nd_range<3>(grid_size * block_size, block_size), \n    [=](sycl::nd_item<3> item_ct1) {\n      initValue(d_odata, 0.0f, item_ct1);\n    });"
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: true
+  - FilePath:        '/home/tcs2/workspace_shwetha/cuda-samples/Samples/5_Domain_Specific/dwtHaar1D/dwtHaar1D.cu'
+    Offset:          10461
+    Length:          1
+    ReplacementText: ''
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/home/tcs2/workspace_shwetha/cuda-samples/Samples/5_Domain_Specific/dwtHaar1D/dwtHaar1D.cu'
+    Offset:          10598
+    Length:          0
+    ReplacementText: "    /*\n    DPCT1083:7: The size of local memory in the migrated code may be different from the original code. Check that the allocated memory size in the migrated code is correct.\n    */\n"
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/home/tcs2/workspace_shwetha/cuda-samples/Samples/5_Domain_Specific/dwtHaar1D/dwtHaar1D.cu'
+    Offset:          10633
+    Length:          12
+    ReplacementText: 'block_size[2]'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/home/tcs2/workspace_shwetha/cuda-samples/Samples/5_Domain_Specific/dwtHaar1D/dwtHaar1D.cu'
+    Offset:          10745
+    Length:          12
+    ReplacementText: 'block_size[2]'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/home/tcs2/workspace_shwetha/cuda-samples/Samples/5_Domain_Specific/dwtHaar1D/dwtHaar1D.cu'
+    Offset:          10808
+    Length:          0
+    ReplacementText: "    /*\n    DPCT1049:6: The work-group size passed to the SYCL kernel may exceed the limit. To get the device limit, query info::device::max_work_group_size. Adjust the work-group size if needed.\n    */\n"
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/home/tcs2/workspace_shwetha/cuda-samples/Samples/5_Domain_Specific/dwtHaar1D/dwtHaar1D.cu'
+    Offset:          10812
+    Length:          149
+    ReplacementText: "dpct::get_in_order_queue().submit(\n      [&](sycl::handler &cgh) {\n        sycl::local_accessor<uint8_t, 1> dpct_local_acc_ct1(sycl::range<1>(mem_shared), cgh);\n\n        cgh.parallel_for(\n          sycl::nd_range<3>(grid_size * block_size, block_size), \n          [=](sycl::nd_item<3> item_ct1) {\n            dwtHaar1D(d_idata, d_odata, approx_final, dlevels_step, num_threads_total_left, block_size[2], item_ct1, dpct_local_acc_ct1.get_pointer());\n          });\n      });"
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: true
+  - FilePath:        '/home/tcs2/workspace_shwetha/cuda-samples/Samples/5_Domain_Specific/dwtHaar1D/dwtHaar1D.cu'
+    Offset:          10961
+    Length:          1
+    ReplacementText: ''
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/home/tcs2/workspace_shwetha/cuda-samples/Samples/5_Domain_Specific/dwtHaar1D/dwtHaar1D.cu'
+    Offset:          11062
+    Length:          10
+    ReplacementText: 'DPCT_CHECK_ERROR(dpct::get_in_order_queue().memcpy'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/home/tcs2/workspace_shwetha/cuda-samples/Samples/5_Domain_Specific/dwtHaar1D/dwtHaar1D.cu'
+    Offset:          11096
+    Length:          11
+    ReplacementText: 'grid_size[2]'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/home/tcs2/workspace_shwetha/cuda-samples/Samples/5_Domain_Specific/dwtHaar1D/dwtHaar1D.cu'
+    Offset:          11111
+    Length:          59
+    ReplacementText: ''
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/home/tcs2/workspace_shwetha/cuda-samples/Samples/5_Domain_Specific/dwtHaar1D/dwtHaar1D.cu'
+    Offset:          11171
+    Length:          0
+    ReplacementText: ')'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/home/tcs2/workspace_shwetha/cuda-samples/Samples/5_Domain_Specific/dwtHaar1D/dwtHaar1D.cu'
+    Offset:          11209
+    Length:          10
+    ReplacementText: 'DPCT_CHECK_ERROR(dpct::get_in_order_queue().memcpy'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/home/tcs2/workspace_shwetha/cuda-samples/Samples/5_Domain_Specific/dwtHaar1D/dwtHaar1D.cu'
+    Offset:          11243
+    Length:          11
+    ReplacementText: 'grid_size[2]'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/home/tcs2/workspace_shwetha/cuda-samples/Samples/5_Domain_Specific/dwtHaar1D/dwtHaar1D.cu'
+    Offset:          11258
+    Length:          59
+    ReplacementText: ''
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/home/tcs2/workspace_shwetha/cuda-samples/Samples/5_Domain_Specific/dwtHaar1D/dwtHaar1D.cu'
+    Offset:          11318
+    Length:          0
+    ReplacementText: ')'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/home/tcs2/workspace_shwetha/cuda-samples/Samples/5_Domain_Specific/dwtHaar1D/dwtHaar1D.cu'
+    Offset:          11802
+    Length:          11
+    ReplacementText: 'grid_size[2]'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/home/tcs2/workspace_shwetha/cuda-samples/Samples/5_Domain_Specific/dwtHaar1D/dwtHaar1D.cu'
+    Offset:          11937
+    Length:          11
+    ReplacementText: 'grid_size[2]'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/home/tcs2/workspace_shwetha/cuda-samples/Samples/5_Domain_Specific/dwtHaar1D/dwtHaar1D.cu'
+    Offset:          11963
+    Length:          12
+    ReplacementText: 'block_size[2]'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/home/tcs2/workspace_shwetha/cuda-samples/Samples/5_Domain_Specific/dwtHaar1D/dwtHaar1D.cu'
+    Offset:          12157
+    Length:          10
+    ReplacementText: 'DPCT_CHECK_ERROR(dpct::get_in_order_queue().memcpy'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/home/tcs2/workspace_shwetha/cuda-samples/Samples/5_Domain_Specific/dwtHaar1D/dwtHaar1D.cu'
+    Offset:          12193
+    Length:          24
+    ReplacementText: ''
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/home/tcs2/workspace_shwetha/cuda-samples/Samples/5_Domain_Specific/dwtHaar1D/dwtHaar1D.cu'
+    Offset:          12218
+    Length:          0
+    ReplacementText: '.wait())'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/home/tcs2/workspace_shwetha/cuda-samples/Samples/5_Domain_Specific/dwtHaar1D/dwtHaar1D.cu'
+    Offset:          13384
+    Length:          17
+    ReplacementText: 'DPCT_CHECK_ERROR(sycl::free(d_odata, dpct::get_in_order_queue())'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/home/tcs2/workspace_shwetha/cuda-samples/Samples/5_Domain_Specific/dwtHaar1D/dwtHaar1D.cu'
+    Offset:          13401
+    Length:          0
+    ReplacementText: ')'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/home/tcs2/workspace_shwetha/cuda-samples/Samples/5_Domain_Specific/dwtHaar1D/dwtHaar1D.cu'
+    Offset:          13422
+    Length:          17
+    ReplacementText: 'DPCT_CHECK_ERROR(sycl::free(d_idata, dpct::get_in_order_queue())'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/home/tcs2/workspace_shwetha/cuda-samples/Samples/5_Domain_Specific/dwtHaar1D/dwtHaar1D.cu'
+    Offset:          13439
+    Length:          0
+    ReplacementText: ')'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/home/tcs2/workspace_shwetha/cuda-samples/Samples/5_Domain_Specific/dwtHaar1D/dwtHaar1D.cu'
+    Offset:          13460
+    Length:          22
+    ReplacementText: 'DPCT_CHECK_ERROR(sycl::free(approx_final, dpct::get_in_order_queue())'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/home/tcs2/workspace_shwetha/cuda-samples/Samples/5_Domain_Specific/dwtHaar1D/dwtHaar1D.cu'
+    Offset:          13482
+    Length:          0
+    ReplacementText: ')'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+MainSourceFilesDigest:
+  - MainSourceFile:  '/home/tcs2/workspace_shwetha/cuda-samples/Samples/5_Domain_Specific/dwtHaar1D/dwtHaar1D.cu'
+    Digest:          5aff9e0c406bc722d33ebd1f76d8469d
+DpctVersion:     18.0.0
+MainHelperFileName: ''
+USMLevel:        ''
+FeatureMap:      {}
+CompileTargets:  {}
+OptionMap:
+  AnalysisScopePath:
+    Value:           '/home/tcs2/workspace_shwetha/cuda-samples'
+    Specified:       false
+  AsyncHandler:
+    Value:           'false'
+    Specified:       false
+  CommentsEnabled:
+    Value:           'false'
+    Specified:       false
+  CompilationsDir:
+    Value:           '/home/tcs2/workspace_shwetha/cuda-samples/Samples/5_Domain_Specific/dwtHaar1D'
+    Specified:       true
+  CtadEnabled:
+    Value:           'false'
+    Specified:       false
+  EnablepProfiling:
+    Value:           'false'
+    Specified:       false
+  ExperimentalFlag:
+    Value:           '0'
+    Specified:       false
+  ExplicitClNamespace:
+    Value:           'false'
+    Specified:       false
+  ExplicitNamespace:
+    Value:           '20'
+    Specified:       false
+  ExtensionDDFlag:
+    Value:           '0'
+    Specified:       false
+  ExtensionDEFlag:
+    Value:           '4294967295'
+    Specified:       false
+  HelperFuncPreferenceFlag:
+    Value:           '0'
+    Specified:       false
+  NDRangeDim:
+    Value:           '3'
+    Specified:       false
+  NoDRYPattern:
+    Value:           'false'
+    Specified:       false
+  NoUseGenericSpace:
+    Value:           ''
+    Specified:       true
+  OptimizeMigration:
+    Value:           'false'
+    Specified:       false
+  ProcessAll:
+    Value:           'false'
+    Specified:       false
+  RuleFile:
+    Value:           ''
+    Specified:       false
+  SyclNamedLambda:
+    Value:           'false'
+    Specified:       false
+  UsmLevel:
+    Value:           '1'
+    Specified:       false
+...
