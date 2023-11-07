@@ -1,6 +1,6 @@
 # `SHFL_Scan` Sample
  
-The `SHFL_Scan`, CUDA parallel prefix sum with shuffle intrinsics sample demonstrates the use of shuffle intrinsic __shfl_up_sync to perform a scan operation across a thread block. The sample also demonstrates the migration of these CUDA shuffle intrinsic APIs to the SYCL group algorithm. The sample is implemented using SYCL* by migrating code from the original CUDA source code and offloading computations to a CPU, GPU, or accelerator.
+The `SHFL_Scan`, CUDA parallel prefix sum with shuffle intrinsics sample demonstrates the use of shuffle intrinsic __shfl_up_sync to perform a scan operation across a thread block. The sample also demonstrates the migration of these CUDA shuffle intrinsic APIs to the SYCL group algorithm. This sample is implemented using SYCL* by migrating code from the original CUDA source code and offloading computations across GPUs from multiple vendors.
 
 | Area                      | Description
 |:---                       |:---
@@ -32,7 +32,7 @@ This sample contains two versions in the following folders:
 | Optimized for              | Description
 |:---                        |:---
 | OS                         | Ubuntu* 22.04
-| Hardware                   | Intel® Gen9 <br> Intel® Gen11 <br> Intel® Xeon CPU <br> Intel® Data Center GPU Max <br> Nvidia Testla P100 <br> Nvidia A100 <br> Nvidia H100 
+| Hardware                   | Intel® Gen9 <br> Intel® Gen11 <br> Intel® Xeon CPU <br> Intel® Data Center GPU Max <br> Nvidia Tesla P100 <br> Nvidia A100 <br> Nvidia H100 
 | Software                   | SYCLomatic (Tag - 20231004) <br> Intel® oneAPI Base Toolkit (Base Kit) version 2023.2.1 <br> oneAPI for NVIDIA GPUs plugin (version 2023.2.0) from Codeplay
 
 For more information on how to install Syclomatic Tool, visit [Migrate from CUDA* to C++ with SYCL*](https://www.intel.com/content/www/us/en/developer/tools/oneapi/training/migrate-from-cuda-to-cpp-with-sycl.html#gs.v354cy) <br>
@@ -45,7 +45,7 @@ This sample demonstrates the migration of the following prominent CUDA features:
 - Warp-level Primitives
 - Shared Memory
 
-The computation of `shuffle_simple_test` host method is included in two kernels, `shfl_scan_test` where __shfl_up is used to perform a scan operation across a block. It performs a scan inside a warp then to continue the scan operation across the block, each warp's sum is placed into shared memory. A single warp then performs a shuffle scan on that shared memory these results are then uniformly added to each warp's threads. The final sum of each block is then placed in global memory and the prefix sum is computed by `uniform_add` kernel call.
+The computation of `shuffle_simple_test` host method is included in two kernels, `shfl_scan_test` where __shfl_up is used to perform a scan operation across a block. It performs a scan inside a warp then to continue the scan operation across the block, each warp's sum is placed into shared memory. A single warp then performs a shuffle scan on that shared memory these results are then uniformly added to each warp's threads. The final sum of each block is then placed in global memory and the prefix sum is computed by the `uniform_add` kernel call.
 
 In the `shuffle_integral_image_test` method each thread is set to handle 16 values. In horizontal scan `get_prefix_sum` kernel the prefix sum for each thread's 16 value is computed, and the final sums are shared with other threads through the __shfl_up() instruction and a shuffle scan operation is performed to distribute the sums to the correct threads. Then shuffle `__shfl_xor` command is used to reformat the data inside the registers so that each thread holds consecutive data to be written so larger contiguous segments can be assembled for writing. 
 
