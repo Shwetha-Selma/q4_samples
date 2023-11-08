@@ -1,6 +1,6 @@
 # `SHFL_Scan` Sample
  
-The `SHFL_Scan`, CUDA parallel prefix sum with shuffle intrinsics sample demonstrates the use of shuffle intrinsic __shfl_up_sync to perform a scan operation across a thread block. The sample also demonstrates the migration of these CUDA shuffle intrinsic APIs to the SYCL group algorithm. This sample is implemented using SYCL* by migrating code from the original CUDA source code and offloading computations across GPUs from multiple vendors.
+The `SHFL_Scan`, CUDA parallel prefix sum with shuffle intrinsics sample demonstrates the use of shuffle intrinsic __shfl_up_sync to perform a scan operation across a thread block. The sample also demonstrates the migration of these CUDA shuffle intrinsic APIs to the SYCL group algorithm. The original CUDA* source code is migrated to SYCL for portability across GPUs from multiple vendors.
 
 | Area                      | Description
 |:---                       |:---
