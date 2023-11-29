@@ -31,7 +31,7 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-// Shuffle intrinsics CUDA Sample
+// Shuffle intrinsics CUDA Migrated Sample
 // This sample demonstrates the use of the shuffle intrinsic
 // First, a simple example of a prefix sum using the shuffle to
 // perform a scan operation is provided.
@@ -239,12 +239,12 @@ bool shuffle_simple_test(int argc, char **argv) {
   const int n_elements = 65536;
   int sz = sizeof(int) * n_elements;
 
-  checkCudaErrors(DPCT_CHECK_ERROR(
+  DPCT_CHECK_ERROR(
       h_data = (int *)sycl::malloc_host(sizeof(int) * n_elements,
-                                        dpct::get_in_order_queue())));
-  checkCudaErrors(DPCT_CHECK_ERROR(
+                                        dpct::get_in_order_queue()));
+  DPCT_CHECK_ERROR(
       h_result = (int *)sycl::malloc_host(sizeof(int) * n_elements,
-                                          dpct::get_in_order_queue())));
+                                          dpct::get_in_order_queue()));
 
   // initialize data:
   printf("Computing Simple Sum test\n");
@@ -276,24 +276,24 @@ bool shuffle_simple_test(int argc, char **argv) {
   dpct::event_ptr start, stop;
   std::chrono::time_point<std::chrono::steady_clock> start_ct1;
   std::chrono::time_point<std::chrono::steady_clock> stop_ct1;
-  checkCudaErrors(DPCT_CHECK_ERROR(start = new sycl::event()));
-  checkCudaErrors(DPCT_CHECK_ERROR(stop = new sycl::event()));
+  DPCT_CHECK_ERROR(start = new sycl::event());
+  DPCT_CHECK_ERROR(stop = new sycl::event());
   float et = 0;
   float inc = 0;
 
-  checkCudaErrors(DPCT_CHECK_ERROR(
-      d_data = (int *)sycl::malloc_device(sz, dpct::get_in_order_queue())));
-  checkCudaErrors(DPCT_CHECK_ERROR(
+  DPCT_CHECK_ERROR(
+      d_data = (int *)sycl::malloc_device(sz, dpct::get_in_order_queue()));
+  DPCT_CHECK_ERROR(
       d_partial_sums =
-          (int *)sycl::malloc_device(partial_sz, dpct::get_in_order_queue())));
-  checkCudaErrors(DPCT_CHECK_ERROR(
-      dpct::get_in_order_queue().memset(d_partial_sums, 0, partial_sz).wait()));
+          (int *)sycl::malloc_device(partial_sz, dpct::get_in_order_queue()));
+  DPCT_CHECK_ERROR(
+      dpct::get_in_order_queue().memset(d_partial_sums, 0, partial_sz).wait());
 
-  checkCudaErrors(DPCT_CHECK_ERROR(
+  DPCT_CHECK_ERROR(
       h_partial_sums =
-          (int *)sycl::malloc_host(partial_sz, dpct::get_in_order_queue())));
-  checkCudaErrors(DPCT_CHECK_ERROR(
-      dpct::get_in_order_queue().memcpy(d_data, h_data, sz).wait()));
+          (int *)sycl::malloc_host(partial_sz, dpct::get_in_order_queue()));
+  DPCT_CHECK_ERROR(
+      dpct::get_in_order_queue().memcpy(d_data, h_data, sz).wait());
 
   start_ct1 = std::chrono::steady_clock::now();
  
@@ -339,17 +339,17 @@ bool shuffle_simple_test(int argc, char **argv) {
   
   stop->wait();
   stop_ct1 = std::chrono::steady_clock::now();
-  checkCudaErrors(DPCT_CHECK_ERROR(
+  DPCT_CHECK_ERROR(
       (inc = std::chrono::duration<float, std::milli>(stop_ct1 - start_ct1)
-                 .count())));
+                 .count()));
   et += inc;
 
-  checkCudaErrors(DPCT_CHECK_ERROR(
-      dpct::get_in_order_queue().memcpy(h_result, d_data, sz).wait()));
-  checkCudaErrors(
-      DPCT_CHECK_ERROR(dpct::get_in_order_queue()
+  DPCT_CHECK_ERROR(
+      dpct::get_in_order_queue().memcpy(h_result, d_data, sz).wait());
+  
+  DPCT_CHECK_ERROR(dpct::get_in_order_queue()
                            .memcpy(h_partial_sums, d_partial_sums, partial_sz)
-                           .wait()));
+                           .wait());
 
   printf("Test Sum: %d\n", h_partial_sums[n_partialSums - 1]);
   printf("Time (ms): %f\n", et);
@@ -358,16 +358,11 @@ bool shuffle_simple_test(int argc, char **argv) {
 
   bool bTestResult = CPUverify(h_data, h_result, n_elements);
 
-  checkCudaErrors(
-      DPCT_CHECK_ERROR(sycl::free(h_data, dpct::get_in_order_queue())));
-  checkCudaErrors(
-      DPCT_CHECK_ERROR(sycl::free(h_result, dpct::get_in_order_queue())));
-  checkCudaErrors(
-      DPCT_CHECK_ERROR(sycl::free(h_partial_sums, dpct::get_in_order_queue())));
-  checkCudaErrors(
-      DPCT_CHECK_ERROR(sycl::free(d_data, dpct::get_in_order_queue())));
-  checkCudaErrors(
-      DPCT_CHECK_ERROR(sycl::free(d_partial_sums, dpct::get_in_order_queue())));
+  DPCT_CHECK_ERROR(sycl::free(h_data, dpct::get_in_order_queue()));
+  DPCT_CHECK_ERROR(sycl::free(h_result, dpct::get_in_order_queue()));
+  DPCT_CHECK_ERROR(sycl::free(h_partial_sums, dpct::get_in_order_queue()));
+  DPCT_CHECK_ERROR(sycl::free(d_data, dpct::get_in_order_queue()));
+  DPCT_CHECK_ERROR(sycl::free(d_partial_sums, dpct::get_in_order_queue()));
 
   return bTestResult;
 }
@@ -386,8 +381,8 @@ bool shuffle_integral_image_test() {
   printf("\nComputing Integral Image Test on size %d x %d synthetic data\n", w,
          h);
   printf("---------------------------------------------------\n");
-  checkCudaErrors(DPCT_CHECK_ERROR(h_image = (unsigned int *)sycl::malloc_host(
-                                       sz, dpct::get_in_order_queue())));
+  DPCT_CHECK_ERROR(h_image = (unsigned int *)sycl::malloc_host(
+                                       sz, dpct::get_in_order_queue()));
   // fill test "image" with synthetic 1's data
   memset(h_image, 0, sz);
 
@@ -397,15 +392,15 @@ bool shuffle_integral_image_test() {
   int gridSize = h;
 
   // Create a synthetic image for testing
-  checkCudaErrors(DPCT_CHECK_ERROR(
-      d_data = (char *)sycl::malloc_device(sz, dpct::get_in_order_queue())));
-  checkCudaErrors(DPCT_CHECK_ERROR(
+  DPCT_CHECK_ERROR(
+      d_data = (char *)sycl::malloc_device(sz, dpct::get_in_order_queue()));
+  DPCT_CHECK_ERROR(
       d_integral_image = (unsigned int *)sycl::malloc_device(
-          n_elements * sizeof(int) * 4, dpct::get_in_order_queue())));
-  checkCudaErrors(DPCT_CHECK_ERROR(
-      dpct::get_in_order_queue().memset(d_data, 1, sz).wait()));
-  checkCudaErrors(DPCT_CHECK_ERROR(
-      dpct::get_in_order_queue().memset(d_integral_image, 0, sz).wait()));
+          n_elements * sizeof(int) * 4, dpct::get_in_order_queue()));
+  DPCT_CHECK_ERROR(
+      dpct::get_in_order_queue().memset(d_data, 1, sz).wait());
+  DPCT_CHECK_ERROR(
+      dpct::get_in_order_queue().memset(d_integral_image, 0, sz).wait());
 
   dpct::event_ptr start, stop;
   std::chrono::time_point<std::chrono::steady_clock> start_ct1;
@@ -435,14 +430,14 @@ bool shuffle_integral_image_test() {
   
   stop->wait();
   stop_ct1 = std::chrono::steady_clock::now();
-  checkCudaErrors(DPCT_CHECK_ERROR(
+  DPCT_CHECK_ERROR(
       (et = std::chrono::duration<float, std::milli>(stop_ct1 - start_ct1)
-                .count())));
+                .count()));
   printf("Method: Fast  Time (GPU Timer): %f ms ", et);
 
   // verify the scan line results
-  checkCudaErrors(DPCT_CHECK_ERROR(
-      dpct::get_in_order_queue().memcpy(h_image, d_integral_image, sz).wait()));
+  DPCT_CHECK_ERROR(
+      dpct::get_in_order_queue().memcpy(h_image, d_integral_image, sz).wait());
   err = verifyDataRowSums(h_image, w, h);
   printf("Diff = %d\n", err);
 
@@ -466,25 +461,23 @@ bool shuffle_integral_image_test() {
  
   stop->wait();
   stop_ct1 = std::chrono::steady_clock::now();
-  checkCudaErrors(DPCT_CHECK_ERROR(
+  DPCT_CHECK_ERROR(
       (et = std::chrono::duration<float, std::milli>(stop_ct1 - start_ct1)
-                .count())));
+                .count()));
   printf("Method: Vertical Scan  Time (GPU Timer): %f ms ", et);
 
   // Verify the column results
-  checkCudaErrors(DPCT_CHECK_ERROR(
-      dpct::get_in_order_queue().memcpy(h_image, d_integral_image, sz).wait()));
+  DPCT_CHECK_ERROR(
+      dpct::get_in_order_queue().memcpy(h_image, d_integral_image, sz).wait());
   printf("\n");
 
   int finalSum = h_image[w * h - 1];
   printf("CheckSum: %d, (expect %dx%d=%d)\n", finalSum, w, h, w * h);
 
-  checkCudaErrors(
-      DPCT_CHECK_ERROR(sycl::free(d_data, dpct::get_in_order_queue())));
-  checkCudaErrors(DPCT_CHECK_ERROR(
-      sycl::free(d_integral_image, dpct::get_in_order_queue())));
-  checkCudaErrors(
-      DPCT_CHECK_ERROR(sycl::free(h_image, dpct::get_in_order_queue())));
+  DPCT_CHECK_ERROR(sycl::free(d_data, dpct::get_in_order_queue()));
+  DPCT_CHECK_ERROR(
+      sycl::free(d_integral_image, dpct::get_in_order_queue()));
+  DPCT_CHECK_ERROR(sycl::free(h_image, dpct::get_in_order_queue()));
   // verify final sum: if the final value in the corner is the same as the size
   // of the buffer (all 1's) then the integral image was generated successfully
   return (finalSum == w * h) ? true : false;
@@ -492,14 +485,14 @@ bool shuffle_integral_image_test() {
 
 int main(int argc, char *argv[]) {
 
-  int cuda_device = 0;
+  int dpct_device = 0;
   printf("Starting shfl_scan\n");
 
   dpct::device_info deviceProp;
-  checkCudaErrors(cuda_device = dpct::dev_mgr::instance().current_device_id());
+  dpct_device = dpct::dev_mgr::instance().current_device_id();
 
-  checkCudaErrors(DPCT_CHECK_ERROR(dpct::get_device_info(
-      deviceProp, dpct::dev_mgr::instance().get_device(cuda_device))));
+  DPCT_CHECK_ERROR(dpct::get_device_info(
+      deviceProp, dpct::dev_mgr::instance().get_device(dpct_device)));
       
   std::cout << "Running on device: "<< deviceProp.get_name() << "\n";
   
