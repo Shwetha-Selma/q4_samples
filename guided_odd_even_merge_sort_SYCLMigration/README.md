@@ -47,7 +47,7 @@ This sample demonstrates the migration of the following prominent CUDA features:
 
 ### CUDA Source Code Evaluation
 
-In this implementation, a random sequence of power of 2 elements is given as input, and the algorithm sorts the sequence in parallel. The algorithm sorts the first half of the list and the second half of the list separately. The algorithm then sorts the odd-indexed entries and the even-indexed entries separately. You need to make only one more comparison switch per pair of keys to sort the list completely.
+In this implementation, a random sequence of power of 2 elements is given as input, and the algorithm sorts the sequence in parallel. The algorithm sorts the first half of the list and the second half of the list separately. The algorithm then sorts the odd-indexed entries and the even-indexed entries separately. You have need only one more comparison switch per pair of keys to sort the list completely.
 
 In this sample, the array length of 1048576 is the input size for the algorithm. The code checks for all the input sizes in the intervals of 2nd power from array lengths from  64 to 1048576 calculated for one iteration. The comparator swaps the value if a top value is greater or equal to the bottom value.
 
@@ -55,7 +55,7 @@ In this sample, the array length of 1048576 is the input size for the algorithm.
 
 ## Set Environment Variables
 
-When working with the command-line interface (CLI), you should configure the oneAPI toolkits using environment variables. Set up your CLI environment by sourcing the `setvars` script every time you open a new terminal window. This practice ensures that compiler, libraries, and tools are ready for development.
+When working with the command-line interface (CLI), you should configure the oneAPI toolkits using environment variables. Set up your CLI environment by sourcing the `setvars` script each time you open a new terminal window. This practice ensures that compilers, libraries, and tools are ready for development.
 
 ## Migrate the `Odd-Even Mergesort` Code
 
@@ -77,7 +77,7 @@ For this sample, the SYCLomatic tool automatically migrates ~80% of the CUDA run
    ```
    The above step creates a JSON file named compile_commands.json with all the compiler invocations and stores the names of the input files and the compiler options.
 
-4. Pass the JSON file as input to the SYCLomatic compatibility tool. The result is written to a folder named dpct_output. The --in-root specifies the path to the root of the source tree to be migrated. The `--gen-helper-function` option will make a copy of dpct header files/functions used in migrated code into the dpct_output folder as `include` folder.
+4. Pass the JSON file as input to the SYCLomatic compatibility tool. The result is written to a folder named dpct_output. The `--in-root` specifies the path to the root of the source tree to be migrated. The `--gen-helper-function` option will make a copy of dpct header files/functions used in migrated code into the dpct_output folder as `include` folder.
    ```
    c2s -p compile_commands.json --in-root ../../.. --gen-helper-function
    ```
@@ -89,7 +89,7 @@ CUDA code includes a custom API `findCUDADevice` in helper_cuda file to find the
    ```
     findCudaDevice (argc, (const char **) argv);
    ```
-Since its a custom API SYCLomatic tool will not act on it and we can either remove it or replace it with the `sycl get_device()` API
+Since it's a custom API SYCLomatic tool will not act on it and we can either remove it or replace it with the `sycl get_device()` API
 
 
 ## Build and Run the `Odd-Even Mergesort` Sample
