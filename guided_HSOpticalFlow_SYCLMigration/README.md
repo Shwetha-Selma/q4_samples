@@ -1,6 +1,6 @@
 ﻿# `HSOpticalFlow` Sample
 
-The `HSOpticalFlow` sample is a computation of per-pixel motion estimation between two consecutive image frames caused by the movement of an object or camera. This sample is implemented using SYCL* by migrating code from the original CUDA source code and offloading computations to a CPU, GPU, or another accelerator.
+The `HSOpticalFlow` sample is a computation of per-pixel motion estimation between two consecutive image frames caused by the movement of an object or camera. The original CUDA* source code is migrated to SYCL for portability across GPUs from multiple vendors.
 
 | Area                      | Description
 |:---                       |:---
